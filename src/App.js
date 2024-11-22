@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'; // React에서 Component 가져오기
+import logo from './logo.svg'; // 중복 제거, 이미지 경로
+import './App.css'; // CSS 경로
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="gray-background">
+        <img src={logo} alt="logo" />
+        <h2>안녕</h2>
+      </div>
+    );
+  }
 }
 
 export default App;

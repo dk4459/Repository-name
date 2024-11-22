@@ -1,3 +1,6 @@
+## managemt
+본 프로젝트는 React강의 목적
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
