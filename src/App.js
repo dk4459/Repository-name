@@ -5,7 +5,7 @@ import Customer from './components/Customer';
 const customers =[{
   'id' :1,
   'image' : 'https://placeimg.com/64/64/any',
-  'name': '홍길동',
+  'name': '홍길동r',
   'birthday':'9611222',
   'gender':'남자',
   'job':'대학생'
