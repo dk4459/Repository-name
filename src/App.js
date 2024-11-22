@@ -7,7 +7,7 @@ const customers =[{
   'image' : 'https://placeimg.com/64/64/any',
   'name': '홍길동r',
   'birthday':'9611222',
-  'gender':'남자',
+  'gender':'남ff자',
   'job':'대학생'
 },
 {
@@ -16,7 +16,7 @@ const customers =[{
   'name': '홍e동',
   'birthday':'9611222',
   'gender':'남자',
-  'job':'대학생'
+  'job':'대학e생'
 },
 {
   'id' :3,
