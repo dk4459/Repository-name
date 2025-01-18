@@ -8,7 +8,7 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import { styled } from '@mui/system'; // styled import
-
+import CircularProgress from '@mui/material/CircularProgress';
 // 스타일을 styled API로 작성
 const Root = styled('div')({
   width: '100%',
@@ -20,49 +20,34 @@ const StyledTable = styled(Table)({
   minWidth: 1080
 });
 
-const customers = [{
-  'id': 1,
-  'image': 'https://placeimg.com/64/64/any',
-  'name': '홍길동r',
-  'birthday': '9611222',
-  'gender': '남ff자',
-  'job': '대학생'
-},
-{
-  'id': 2,
-  'image': 'https://placeimg.com/64/64/any',
-  'name': '홍e동',
-  'birthday': '9611222',
-  'gender': '남자',
-  'job': '대학ee생'
-},
-{
-  'id': 3,
-  'image': 'https://placeimg.com/64/64/any',
-  'name': '홍q동',
-  'birthday': '9611222',
-  'gender': '남자',
-  'job': '대학생'
-},
-{
-  'id': 4,
-  'image': 'https://placeimg.com/64/64/any',
-  'name': '홍q동',
-  'birthday': '9611222',
-  'gender': '남자',
-  'job': '대학생'
-},
-{
-  'id': 5,
-  'image': 'https://placeimg.com/64/64/any',
-  'name': '홍q동',
-  'birthday': '9611222',
-  'gender': '남자',
-  'job': '대학생'
-}
-];
-
 class App extends Component {
+  state = {
+    customers: "",
+    completed: 0
+  }
+  componentDidMount(){
+    this.timer = setInterval(this.progress, 100);
+    setTimeout(() => {
+      this.callApi()
+        .then(res => 
+           this.setState({ customers: res },
+            console.log(res)
+           )
+          )
+          
+        .catch(err => console.log(err));
+    }, 2000); // 4초 후에 API 호출
+  }
+  callApi = async () =>{
+    const response = await fetch('/api/customers')
+    const body = await response.json();
+    console.log(body)
+    return body;
+  }
+  progress = () => {
+    const {completed} = this.state;
+    this.setState ({ completed: completed >= 100 ? 0: completed + 10})
+  }
   render() {
     return (
       <Root>
@@ -79,7 +64,8 @@ class App extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.map((customer) => (
+              {this.state.customers && this.state.customers.length > 0 ?
+                 this.state.customers.map((customer) => (
                 <Customer
                   key={customer.id} // 각 항목에 고유한 key를 제공해야 함
                   id={customer.id}
@@ -89,7 +75,17 @@ class App extends Component {
                   gender={customer.gender}
                   job={customer.job}
                 />
-              ))}
+              )) : 
+              <TableRow>
+              <TableCell colSpan={6} align="center">
+                <CircularProgress variant="determinate" value={this.state.completed} 
+                                  sx={{ margin: '0 auto',
+                                   display: 'block',
+                                   color: 'red' }}
+                                   thickness={10} />
+              </TableCell>
+            </TableRow>
+              }
             </TableBody>
           </StyledTable>
         </Paper>
@@ -97,5 +93,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;

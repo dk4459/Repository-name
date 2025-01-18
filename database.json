@@ -1,0 +1,7 @@
+{
+    "host" : "localhost",
+    "user": "react",
+    "password":"react",
+    "port" :"1521",
+    "database": "XE"
+}
